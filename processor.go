@@ -9,7 +9,7 @@ type processor[Out any, In any] struct {
 	request  *In
 }
 
-func newProcessor[Out any, In any](response *Out, request *In) *processor[Out, In] {
+func NewProcessor[Out any, In any](response *Out, request *In) *processor[Out, In] {
 	fmt.Println("**** : response : ", response)
 	return &processor[Out, In]{
 		response: response,
@@ -18,12 +18,12 @@ func newProcessor[Out any, In any](response *Out, request *In) *processor[Out, I
 }
 
 //func (p *processor) use(step processStep) {
-func (p *processor[Out, In]) use(step func(response *Out, request *In) error) {
+func (p *processor[Out, In]) Use(step func(response *Out, request *In) error) {
 	p.steps = append(p.steps, step)
 }
 
 //func (p *processor) process(response *RegistrationResponse, form *RegistrationForm) {
-func (p *processor[Out, In]) process() {
+func (p *processor[Out, In]) Process() {
 	for i, step := range p.steps {
 
 		fmt.Println(i, " : ", p.response, p.request)
