@@ -2,7 +2,7 @@ package grazer
 
 import "fmt"
 
-type processor[Out any, In any] struct {
+type Processor[Out any, In any] struct {
 	steps    []func(out *Out, in *In) error
 	err      error
 	response *Out
