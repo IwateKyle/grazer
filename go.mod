@@ -1,4 +1,4 @@
-module github.com/iwatekyle/grazer/v0.0.4
+module github.com/iwatekyle/v0.0.1/grazer
 
 
 go 1.18
