@@ -4,16 +4,16 @@ import "fmt"
 
 type Processor[Out any, In any] struct {
 	steps    []func(out *Out, in *In) error
-	err      error
-	response *Out
-	request  *In
+	Err      error
+	Response *Out
+	Request  *In
 }
 
 func NewProcessor[Out any, In any](response *Out, request *In) *Processor[Out, In] {
-	fmt.Println("**** : response : ", response)
+	fmt.Println("**** : Response : ", response)
 	return &Processor[Out, In]{
-		response: response,
-		request:  request,
+		Response: response,
+		Request:  request,
 	}
 }
 
@@ -24,10 +24,10 @@ func (p *Processor[Out, In]) Use(step func(response *Out, request *In) error) {
 func (p *Processor[Out, In]) Process() {
 	for i, step := range p.steps {
 
-		fmt.Println(i, " : ", p.response, p.request)
-		err := step(p.response, p.request)
+		fmt.Println(i, " : ", p.Response, p.Request)
+		err := step(p.Response, p.Request)
 		if err != nil {
-			p.err = err
+			p.Err = err
 			break
 		}
 	}
