@@ -9,21 +9,21 @@ type Processor[Out any, In any] struct {
 	request  *In
 }
 
-func NewProcessor[Out any, In any](response *Out, request *In) *processor[Out, In] {
+func NewProcessor[Out any, In any](response *Out, request *In) *Processor[Out, In] {
 	fmt.Println("**** : response : ", response)
-	return &processor[Out, In]{
+	return &Processor[Out, In]{
 		response: response,
 		request:  request,
 	}
 }
 
-//func (p *processor) use(step processStep) {
-func (p *processor[Out, In]) Use(step func(response *Out, request *In) error) {
+//func (p *Processor) use(step processStep) {
+func (p *Processor[Out, In]) Use(step func(response *Out, request *In) error) {
 	p.steps = append(p.steps, step)
 }
 
-//func (p *processor) process(response *RegistrationResponse, form *RegistrationForm) {
-func (p *processor[Out, In]) Process() {
+//func (p *Processor) process(response *RegistrationResponse, form *RegistrationForm) {
+func (p *Processor[Out, In]) Process() {
 	for i, step := range p.steps {
 
 		fmt.Println(i, " : ", p.response, p.request)
