@@ -1,3 +1,7 @@
+//go:build (linux || windows) && amd64
+// +build linux windows
+// +build amd64
+
 package grazer
 
 import "fmt"
